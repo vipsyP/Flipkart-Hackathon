@@ -17,8 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginWelcomeActivity"
-            android:label="Welcome"></activity>
+            android:name=".municipal.MunicipalActivity"
+            android:label="Municipal Authority"></activity>
+        <activity
+            android:name=".municipal.Complaint"
+            android:label="Complaint"></activity>
     </application>
 
 </manifest>

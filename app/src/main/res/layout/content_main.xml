@@ -116,12 +116,6 @@
                 android:hint="Role"
                 android:singleLine="true"
                 android:inputType="phone"/>-->
-            <TextView
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text= "Role"/>
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="fill_parent"
