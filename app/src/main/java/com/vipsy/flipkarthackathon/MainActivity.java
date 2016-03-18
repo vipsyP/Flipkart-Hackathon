@@ -3,6 +3,8 @@ package com.vipsy.flipkarthackathon;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +18,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Set<String> EmailSet;
     Set<String> PasswordSet;
     Set<String> ContactSet;
+    String information=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,13 +169,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int index= email_al.indexOf(t_email);
                     //check password stored at this index
                     if(password_al.get(index).equals(t_password)) {
-                        Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(MainActivity.this, LoginWelcomeActivity.class);
+
+                        Log.v("Username and password", et_email + " / " + et_password);
+                        LoginTask loginTask=new LoginTask();
+                        loginTask.execute(t_email,t_password);
+                       /* Intent i = new Intent(MainActivity.this, LoginWelcomeActivity.class);
                         i.putExtra("Name", name_al.get(index));
                         i.putExtra("Email", email_al.get(index));
                         i.putExtra("Role", role_al.get(index));
                         startActivity(i);
-
+                        */
                     }
                     else {
                         Toast.makeText(this, "Did you forget your password?", Toast.LENGTH_SHORT).show();
@@ -228,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                 }
+                RegistrationTask registrationTask=new RegistrationTask();
+                registrationTask.execute(t_email,t_password,t_name,t_role);
                 //Check phone
                 /*{
                 *//*Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -240,41 +253,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
                 }*/
-
-                if (check_valid) {
-
-                    // Check if email exists already!
-                    if (email_al.contains(t_email)) {
-                        Toast.makeText(this, "This email is already registered!", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-
-                    name_al.add(t_name);
-                    email_al.add(t_email);
-                    password_al.add(t_password);
-                    role_al.add(t_role);
-
-                    //Convert ArrayLists to Sets
-                    NameSet = new HashSet<String>();
-                    NameSet.addAll(name_al);
-                    EmailSet = new HashSet<String>();
-                    EmailSet.addAll(email_al);
-                    PasswordSet = new HashSet<String>();
-                    PasswordSet.addAll(password_al);
-                    ContactSet = new HashSet<String>();
-                    ContactSet.addAll(role_al);
-
-                    //Put Sets into SharedPreferences
-                    sharededitor.putStringSet("Name", NameSet);
-                    sharededitor.putStringSet("Email", EmailSet);
-                    sharededitor.putStringSet("Password", PasswordSet);
-                    sharededitor.putStringSet("Contact", ContactSet);
-                    sharededitor.commit();
-
-                    Log.e(MainActivity.class.getSimpleName(), "Profile added!");
-                    Toast.makeText(this, "Registered!", Toast.LENGTH_SHORT).show();
-
-                }
             }
             break;
         }
@@ -291,6 +269,161 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
-}
+    private class LoginTask extends AsyncTask<String , Void , String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            String email=strings[0];
+            String password=strings[1];
+            HttpURLConnection urlConnection=null;
+            BufferedReader reader = null;
+            try {
+                Uri builduri= Uri.parse("http://192.168.169.11:5000/FKPrep/Login?").buildUpon().appendQueryParameter("EmailId",email)
+                        .appendQueryParameter("Password",password).build();
+
+                URL url= new URL(builduri.toString());
+                urlConnection=(HttpURLConnection)url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                }
+                if (buffer.length() == 0) {
+                    return null;
+                }
+                information = buffer.toString();
+                Log.v("got it",information);
+                return information;
+            } catch (Exception e) {
+                Log.e("PlaceholderFragment", "Error ", e);
+                // If the code didn't successfully get the weather data, there's no point in attempting
+                // to parse it.
+                return null;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final Exception e) {
+                        Log.e("PlaceholderFragment", "Error closing stream", e);
+                    }
+                }
+            }
+        }
+        protected void onPostExecute(String[] strings) {
+            //calling the other activity
+            Log.v("information",information);
+            if(information=="0")
+            {
+                //user
+                Log.v("login success","user");
+
+            }
+            else if(information=="1")
+            {
+                //authority
+                Log.v("login success","authority");
+            }
+            else if(information=="2")
+            {
+                //collector
+                Log.v("login success","collector");
+            }
+            else
+            {
+                //incorrect username and password
+                Log.e("login failed","incorrect mail and password");
+            }
+
+        }
+        }
+
+    private class RegistrationTask extends AsyncTask<String , Void , String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            String name=strings[0];
+            String email=strings[1];
+            String password=strings[2];
+            String role=strings[3];
+            HttpURLConnection urlConnection=null;
+            BufferedReader reader = null;
+            try {
+                Log.v("credentials",name+" "+email+" "+password+" "+role);
+                Uri builduri= Uri.parse("http://192.168.169.11:5000/FKPrep/Registration?").buildUpon().appendQueryParameter("EmailId", email)
+                        .appendQueryParameter("Password", password).appendQueryParameter("Name", name).appendQueryParameter("Role",role).build();
+
+                URL url= new URL(builduri.toString());
+                urlConnection=(HttpURLConnection)url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                InputStream  inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                }
+                if (buffer.length() == 0) {
+                    return null;
+                }
+                information = buffer.toString();
+                Log.v("got it",information);
+                return information;
+            } catch (Exception e) {
+                Log.e("PlaceholderFragment", "Error ", e);
+                // If the code didn't successfully get the weather data, there's no point in attempting
+                // to parse it.
+                return null;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final Exception e) {
+                        Log.e("PlaceholderFragment", "Error closing stream", e);
+                    }
+                }
+            }
+        }
+        protected void onPostExecute(String[] strings) {
+            //calling the other activity
+            if(information=="0")
+            {
+                //user
+                Log.v("login success","user");
+
+            }
+            else if(information=="1")
+            {
+                //authority
+                Log.v("login success","authority");
+            }
+            else if(information=="2")
+            {
+                //collector
+                Log.v("login success","collector");
+            }
+            else
+            {
+                //incorrect username and password
+                Log.e("login failed","incorrect mail and password");
+            }
+
+
+            Log.v("information",information);
+        }
+    }
+    }
 
 
