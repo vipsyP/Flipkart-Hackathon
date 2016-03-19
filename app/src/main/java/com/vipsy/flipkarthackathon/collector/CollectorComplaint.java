@@ -1,4 +1,4 @@
-package com.vipsy.flipkarthackathon.municipal;
+package com.vipsy.flipkarthackathon.collector;
 
 import android.content.Intent;
 import android.net.Uri;

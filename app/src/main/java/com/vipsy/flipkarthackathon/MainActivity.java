@@ -177,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(user);
             } else if (result.equals("Garbage collector")) {
                 Log.d("login", "garbage collector");
+                Intent collector=new Intent(MainActivity.this,com.vipsy.flipkarthackathon.collector.CollectorActivity.class);
+                collector.putExtra("userid", et_email.getText().toString());
+                startActivity(collector);
             } else if (result.equals("Municipal officer")) {
                 Log.d("login", "municipal officer");
                 Intent municipalOfficer = new Intent(MainActivity.this,com.vipsy.flipkarthackathon.municipal.MunicipalActivity.class);
@@ -209,8 +212,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.v("registration success", result);
             if (result.equals("0")) {
                 Log.d("regi", "user");
+                Intent user=new Intent(MainActivity.this,com.vipsy.flipkarthackathon.user.UserActivity.class);
+                user.putExtra("userid",et_email.getText().toString());
+                startActivity(user);
+
             } else if (result.equals("2")) {
                 Log.d("regi", "garbage collector");
+                Log.d("login", "garbage collector");
+                Intent collector=new Intent(MainActivity.this,com.vipsy.flipkarthackathon.collector.CollectorActivity.class);
+                collector.putExtra("userid",et_email.getText().toString());
+                startActivity(collector);
             } else if (result.equals("1")) {
                 Log.d("regi", "municipal officer");
                 Intent municipalOfficer = new Intent(MainActivity.this,com.vipsy.flipkarthackathon.municipal.MunicipalActivity.class);

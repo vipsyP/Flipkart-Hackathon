@@ -86,10 +86,11 @@ public class CollectorFragment extends Fragment {
         */}
 
     class CollectorComplaintsTask extends AsyncTask<String , String , String> {
+        String userid;
         @Override
         protected String doInBackground(String... strings) {
-            String userid=strings[0];
-            Uri builduri= Uri.parse("FKPrep/GetCollectorComplaints?").buildUpon().appendQueryParameter("EmailId", userid)
+            userid=strings[0];
+            Uri builduri= Uri.parse("FKPrep/GetResolvingComplaints?").buildUpon().appendQueryParameter("EmailId", userid).appendQueryParameter("type","1")
                     .build();
             ConnectionClass conn=new ConnectionClass();
             return conn.send(builduri.toString());
@@ -103,8 +104,7 @@ public class CollectorFragment extends Fragment {
                 String cname=null;
                 String cdes=null;
                 String date=null;
-                String userid=null;
-                String status=null;
+                String status="resolving";
                 persons = new ArrayList<>();
                 for(int i=0;i<info.length();i++)
                 {
@@ -123,10 +123,6 @@ public class CollectorFragment extends Fragment {
                     if(info.getJSONObject(i).has("userid")){
                         userid=info.getJSONObject(i).getString("userid");
                     }
-                    if(info.getJSONObject(i).has("status")){
-                        status=info.getJSONObject(i).getString("status");
-                    }
-
                     persons.add(new CollectorPerson(cid, userid, cname, cdes, status, date));
                 }
 
