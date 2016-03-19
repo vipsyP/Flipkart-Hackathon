@@ -33,7 +33,6 @@ public class UserActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent in=new Intent(UserActivity.this,MainActivity.class);
         in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
         startActivity(in);
     }
 
@@ -56,14 +55,9 @@ public class UserActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-
-        tv_name= (TextView)findViewById(R.id.tv_name);
         tv_email= (TextView)findViewById(R.id.tv_email);
-        tv_role = (TextView)findViewById(R.id.tv_role);
         Intent i = getIntent();
-        tv_name.setText(i.getStringExtra("Name"));
         tv_email.setText(i.getStringExtra("Email"));
-        tv_role.setText(i.getStringExtra("Role"));
     }
 
     @Override

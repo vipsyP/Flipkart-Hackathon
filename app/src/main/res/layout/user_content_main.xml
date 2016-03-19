@@ -15,15 +15,6 @@
             android:orientation="vertical" android:layout_width="match_parent">
 
             <TextView
-                android:layout_height= "wrap_content"
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:text="Name: "
-                />
-
-            <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height= "wrap_content"
@@ -31,13 +22,6 @@
                 android:ems="10"
                 android:text="Email: "/>
 
-            <TextView
-                android:id="@+id/tv_role"
-                android:layout_width="match_parent"
-                android:layout_height= "wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:text="Roles: "/>
-        </LinearLayout>
+            </LinearLayout>
     </android.support.v7.widget.Toolbar>
 </LinearLayout>

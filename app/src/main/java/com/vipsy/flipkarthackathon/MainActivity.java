@@ -172,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.v("Login completed", result);
             if (result.equals("User")) {
                 Log.d("login", "user");
+                Intent user=new Intent(MainActivity.this,com.vipsy.flipkarthackathon.user.UserActivity.class);
+                user.putExtra("userid",et_email.getText().toString());
+                startActivity(user);
             } else if (result.equals("Garbage collector")) {
                 Log.d("login", "garbage collector");
             } else if (result.equals("Municipal officer")) {
