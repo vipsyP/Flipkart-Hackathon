@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Swachh Streetb</string>
     <string name="spinner_title">Role</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+
+    <string name="ComplaintsFiled" translatable="false">Complaints filed</string>
+    <string name="ResolvedComplaints" translatable="false">Resolved</string>
+    <string name="FindTrashCan" translatable="false">Find trash cans</string>
     <string name="title_activity_main2">Main2Activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

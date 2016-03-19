@@ -22,7 +22,7 @@ TextView tv_email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_content_main);
+        setContentView(R.layout.municipal_content_main);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

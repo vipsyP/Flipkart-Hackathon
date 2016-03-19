@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/ComplainsFiled"
+        android:label="Complaints filed"
+        android:title="@string/ComplaintsFiled"
+        app:showAsAction="never"></item>
+    <item android:id="@+id/ResolvedComplaints"
+        android:label="Resolved"
+        android:title="@string/ResolvedComplaints"
+        app:showAsAction="never"></item>
+    <item android:id="@+id/FindTrashCan"
+        android:label="Find trash cans"
+        android:title="@string/FindTrashCan"
+        app:showAsAction="never"></item>
+
+</menu>

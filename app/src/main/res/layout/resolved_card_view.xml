@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    >
+    <!--android:padding="16dp"-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv"
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVName"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:text= "Name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVComplaint"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:text= "Complaint"
+            android:layout_below= "@+id/TVName"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVStatus"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:text= "Status"
+            android:layout_below= "@+id/TVComplaint"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVTime"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:text= "Time"
+            android:layout_below= "@id/TVStatus"
+            android:layout_alignParentRight="true"
+
+            />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
