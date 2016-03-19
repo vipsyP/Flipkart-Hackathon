@@ -56,10 +56,10 @@ public class MunicipalRVAdapter extends RecyclerView.Adapter<MunicipalRVAdapter.
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (RelativeLayout)itemView.findViewById(R.id.cv);
-            personName=                (TextView)itemView.findViewById(R.id.TVName);
-            personComplaint   =                 (TextView)itemView.findViewById(R.id.TVComplaint);
-            personStatus   =                 (TextView)itemView.findViewById(R.id.TVStatus);
-            personTime   =                 (TextView)itemView.findViewById(R.id.TVTime);
+            personName=(TextView)itemView.findViewById(R.id.TVName);
+            personComplaint   = (TextView)itemView.findViewById(R.id.TVComplaint);
+            personStatus   = (TextView)itemView.findViewById(R.id.TVStatus);
+            personTime   =   (TextView)itemView.findViewById(R.id.TVTime);
 
         }
     }

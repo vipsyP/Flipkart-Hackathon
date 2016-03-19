@@ -11,15 +11,15 @@ import java.net.URL;
 
 public class ConnectionClass
 {
-
-    static String send(String url)
+    public static String urlhome="http://192.168.169.29:5000/";
+   public static String send(String url)
     {
         Log.d("send method ","reached");
 
         String responce = null;
         try {
             Log.d("ConnectionClass","reached");
-            URL urlString = new URL(url);
+            URL urlString = new URL(urlhome+url);
             Log.e("connection class", "18");
             HttpURLConnection connection = (HttpURLConnection) urlString
                     .openConnection();

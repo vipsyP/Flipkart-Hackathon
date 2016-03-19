@@ -3,14 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVComplainerID"
+        android:text= "Sample ID"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        ></TextView>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/TVComplainerName"
         android:text= "Sample Name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/TVComplainerID"
         ></TextView>
 
 
@@ -44,5 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text= "Resolve this issue!"/>
+        android:text= "Resolve this issue!"
+        android:onClick="onClickResolving"/>
 </RelativeLayout>
