@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.vipsy.flipkarthackathon.ConnectionClass;
 import com.vipsy.flipkarthackathon.R;
 import com.vipsy.flipkarthackathon.RecyclerItemClickListener;
-import com.vipsy.flipkarthackathon.municipal.CollectorComplaint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -140,8 +139,7 @@ public class CollectorFragment extends Fragment {
                             Intent i = new Intent(getActivity(), CollectorComplaint.class);
                             i.putExtra("Complain ID", "" + persons.get(position).complain_id);
                             i.putExtra("Name", "" + persons.get(position).name);
-                            i.putExtra("Complaint Title", "" + persons.get(position).complaint_title);
-                            i.putExtra("Complaint Body", "" + persons.get(position).complaint_body);
+                            i.putExtra("Complaint Title", "" + persons.get(position).complaint_title);              i.putExtra("Complaint Body", "" + persons.get(position).complaint_body);
                             startActivity(i);
                         }
                     })
