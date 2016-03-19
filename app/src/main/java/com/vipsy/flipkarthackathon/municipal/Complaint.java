@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class Complaint extends AppCompatActivity{
         TVComplaintTitle = (TextView)findViewById(R.id.TVComplaintTitle);
         TVComplaintBody = (TextView)findViewById(R.id.TVComplaintBody);
         TVComplaintId=(TextView)findViewById(R.id.TVComplainerID);
+        String Status=i.getStringExtra("Status");
+        if(Status.equals("resolving"))
+        ((Button)findViewById(R.id.BResolve)).setVisibility(View.INVISIBLE);
         TVComplainerName.setText(i.getStringExtra("Name"));
         TVComplaintTitle.setText(i.getStringExtra("Complaint Title"));
         TVComplaintBody.setText(i.getStringExtra("Complaint Body"));

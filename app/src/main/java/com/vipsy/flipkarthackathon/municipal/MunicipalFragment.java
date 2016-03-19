@@ -58,6 +58,7 @@ public class MunicipalFragment extends Fragment {
                         i.putExtra("Name", "" + persons.get(position).name);
                         i.putExtra("Complaint Title", "" + persons.get(position).complaint_title);
                         i.putExtra("Complaint Body", "" + persons.get(position).complaint_body);
+                        i.putExtra("Status",""+persons.get(position).status);
                         startActivity(i);
                     }
                 })

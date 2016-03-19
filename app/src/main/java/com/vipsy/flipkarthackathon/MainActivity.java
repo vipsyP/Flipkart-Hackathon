@@ -126,9 +126,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 t_password = et_password.getText().toString();
                 //t_role = et_phone.getText().toString();
                 t_role = spinner.getSelectedItem().toString();
-                RegistrationTask registrationTask = new RegistrationTask();
-                registrationTask.execute(t_name, t_email, t_password, t_role);
-
+                if(t_name.trim().length()<6)
+                    Toast.makeText(getBaseContext(),"Name should be greater than or equal to 6",Toast.LENGTH_LONG).show();
+                else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(t_email).matches())
+                    Toast.makeText(getBaseContext(),"Enter valid email",Toast.LENGTH_LONG).show();
+                else if((t_password.trim()).equals("") || t_password.length()<6) {
+                    Toast.makeText(getBaseContext(),"Password should be greater or equal to 6",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    RegistrationTask registrationTask = new RegistrationTask();
+                    registrationTask.execute(t_name, t_email, t_password, t_role);
+                }
             }
             break;
         }
@@ -169,10 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (result.equals("Municipal officer")) {
                 Log.d("login", "municipal officer");
                 Intent municipalOfficer = new Intent(MainActivity.this,com.vipsy.flipkarthackathon.municipal.MunicipalActivity.class);
-                municipalOfficer.putExtra("userid", et_email.getText());
+                municipalOfficer.putExtra("userid", et_email.getText().toString());
                 startActivity(municipalOfficer);
             } else {
                 Log.d("login", "failed");
+                Toast.makeText(getBaseContext(),"Login failed. Check your Credentials",Toast.LENGTH_LONG).show();
             }
 
         }
@@ -206,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(municipalOfficer);
             } else {
                 Log.d("regi", "failed");
+                Toast.makeText(getBaseContext(),"Registration failed as email already exists",Toast.LENGTH_LONG).show();
             }
 
         }
